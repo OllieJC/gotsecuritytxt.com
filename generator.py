@@ -173,6 +173,7 @@ if __name__ == "__main__":
         genSecurityTxtForDomain((0, domain), gen_sites)
     else:
         domains_dict = {}
+        results_list = []
 
         if os.environ.get("GET_SEC_TXT", "false") == "true":
             sites = Sites()
@@ -184,7 +185,6 @@ if __name__ == "__main__":
             else:
                 raise Exception("No domains")
 
-            results_list = []
             with Pool(int(os.environ.get("POOL_SIZE", os.cpu_count()))) as p:
                 results_list = p.map(genSecurityTxtForDomain, domains_dict.items())
 

@@ -19,7 +19,7 @@ class Sites:
         self.top500 = {}
 
     def __str__(self) -> str:
-        return f"{self.getTop500()}"
+        return f"{json.dumps(self.getTop500())}"
 
     def getTop500(self) -> dict:
         if self.cacheAge() > Sites.CACHE_MAX_AGE:

@@ -24,7 +24,7 @@ def setupDist():
     try:
         shutil.rmtree(dist)
     except Exception as e:
-        print(e)
+        log(target="ERROR", message=f"removing {dist} failed", error=e)
 
     os.mkdir(dist)
     os.mkdir(top_sites)
@@ -180,8 +180,10 @@ if __name__ == "__main__":
             domains_dict = sites.getTop500()
 
             if len(domains_dict) > 0:
-                print("Got domain lists, counts:")
-                print("Total -", len(domains_dict))
+                log(
+                    target="INFO",
+                    message="Got domain lists; total count {len(domains_dict)}",
+                )
             else:
                 raise Exception("No domains")
 

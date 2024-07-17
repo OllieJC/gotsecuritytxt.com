@@ -13,7 +13,7 @@ class Sites:
     TOP_SITES_SOURCE = "https://moz.com/top-500/download?table=top500Domains"
     USER_AGENT = "Mozilla/5.0 (OllieJC/findsecuritycontacts.com)"
     CACHE_FILE = "top500.json"
-    CACHE_MAX_AGE = 86400
+    CACHE_MAX_AGE = 64800  # 18 hours
 
     def __init__(self):
         self.top500 = {}

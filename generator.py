@@ -4,7 +4,7 @@ import os
 import re
 import sys
 
-import sites
+from sites import Sites
 
 from multiprocessing import Pool
 
@@ -70,10 +70,12 @@ def genSecurityTxtForDomain(
                 details["target"]: {
                     "rank": details["rank"],
                     "has_contact": details["has_contact"],
-                    "has_dns_contact": True
-                    if "dnssecuritytxt" in details
-                    and details["dnssecuritytxt"]["security_contact"] is not None
-                    else False,
+                    "has_dns_contact": (
+                        True
+                        if "dnssecuritytxt" in details
+                        and details["dnssecuritytxt"]["security_contact"] is not None
+                        else False
+                    ),
                 }
             }
             if "http_security_txt" in details and details["http_security_txt"] != {}:
@@ -173,9 +175,8 @@ if __name__ == "__main__":
         domains_dict = {}
 
         if os.environ.get("GET_SEC_TXT", "false") == "true":
-            domains_dict = (
-                sites.top500
-            )  # {nn: sites.top500[nn] for nn in list(sites.top500)[:10]}
+            sites = Sites()
+            domains_dict = sites.getTop500()
 
             if len(domains_dict) > 0:
                 print("Got domain lists, counts:")

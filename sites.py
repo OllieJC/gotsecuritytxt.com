@@ -65,6 +65,7 @@ class Sites:
             )
             with open(Sites.CACHE_FILE, "w+") as cachefile:
                 json.dump(self.top500, cachefile, indent=2)
+                cachefile.write("\n")
         except (OSError, Exception) as e:
             log(target="ERROR", error=e)
 
